@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model IndexViewModel
+}
+
+@*Check to see if they have clicked on the home which will display a list cool!*@
+@if (ViewBag.TeamName is null)
+{
+    <h1>All Bowlers</h1>
+}
+
+@*show the team name*@
+<h1>
+    @ViewBag.TeamName
+</h1>
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                <!--Making a loop that will display all the bowlers-->
+                @foreach (var x in Model.Bowlers)
+                {
+                    <h6 class="card-text" style="margin:0">@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</h6>
+                    <ul>
+                        <li style="list-style-type:none">@x.BowlerAddress @x.BowlerCity, @x.BowlerState @x.BowlerZip</li>
+                        <li style="list-style-type:none">@x.BowlerPhoneNumber</li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div page-model="@Model.PagingInfo"
+     page-url-team="@Model.Type"
+     page-classes-enabled="true"
+     page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary"
+     class="btn-group pull-right m-1"></div>

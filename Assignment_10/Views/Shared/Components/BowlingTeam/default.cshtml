@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model IEnumerable<Teams>
+}
+
+@*Highlight the home page if it has been selected.*@
+@if (ViewBag.TeamName is null)
+{
+    <a class="btn btn-primary w-100" asp-controller="Home" asp-action="Index" asp-route-teamnameid="">Home</a>
+}
+else
+{
+    <a class="btn w-100" asp-controller="Home" asp-action="Index" asp-route-teamnameid="">Home</a>
+}
+
+@foreach (var b in Model)
+{
+    @*Highlight the teamname *@
+    if (b.TeamName == ViewBag.TeamName)
+    {
+        <a class="btn btn-primary w-100"
+           asp-controller="Home"
+           asp-action="Index"
+           asp-route-teamnameid="@b.TeamId"
+           asp-route-teamname="@b.TeamName"
+           asp-route-pagenum="1">@b.TeamName</a>
+    }
+
+    else
+    {
+        <a class="btn w-100"
+           asp-controller="Home"
+           asp-action="Index"
+           asp-route-teamnameid="@b.TeamId"
+           asp-route-teamname="@b.TeamName"
+           asp-route-pagenum="1">@b.TeamName</a>
+    }
+    <br />
+}
